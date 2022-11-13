@@ -85,7 +85,7 @@ namespace MonitorBreak.Bebug
         'no identifier' Print something to console
         '.' or 'clear' clear console
         'hide' hide all consoles (same as F4)
-        'exit' close console if it is not main console
+        'exit' closes current console
         'new' add a new console
         TAB switch between consoles
         **/
