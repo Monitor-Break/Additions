@@ -61,6 +61,6 @@ Converts a string to any type with a constructor (no enums), implemented using r
 
 # Installation
 
-Package should be installed using the Unity Package Manager via git url. 
+Package should be installed/updated using the Unity Package Manager via git url. 
 
 [Unity Documentation on Installation from Git Url](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
