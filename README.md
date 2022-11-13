@@ -89,4 +89,4 @@ Full list of supported commands:
 UI graphing, allows points to be plotted on a graph that is displayed on screen. Graph will resize to fit all points. 
 
 ### Convertor
-Converts a string to any type with a constructor (no enums), implemented using recursion so use in actual builds may prove to be non-performant. Utilized in the console '/' command.
+Converts a string to any type with a constructor (no enums)/any fundamental type, implemented using recursion so use in actual builds may prove to be non-performant. Utilized in the console '/' command.
