@@ -79,17 +79,6 @@ namespace MonitorBreak.Bebug
             currentOutputColor = new Color(0.8f, 0.8f, 0.8f);
         }
 
-        /**
-        Commands:
-        '/' Execute an arbitrary static function
-        'no identifier' Print something to console
-        '.' or 'clear' clear console
-        'hide' hide all consoles (same as F4)
-        'exit' closes current console
-        'new' add a new console
-        TAB switch between consoles
-        **/
-
         public static void Execute(string inputString, Console output = null)
         {
             //Validate string
