@@ -58,3 +58,9 @@ UI graphing, allows points to be plotted on a graph that is displayed on screen.
 
 ### Convertor
 Converts a string to any type with a constructor (no enums), implemented using recursion so use in actual builds may prove to be non-performant. Utilized in the console '/' command.
+
+# Installation
+
+Package should be installed using the Unity Package Manager via git url. 
+
+[Unity Documentation on Installation from Git Url](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
