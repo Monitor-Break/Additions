@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace MonitorBreak.ComponentContainer 
+namespace MonitorBreak 
 {
     public class ComponentContainer : MonoBehaviour
     {
