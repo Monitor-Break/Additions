@@ -69,4 +69,4 @@ Package should be installed/updated using the Unity Package Manager via git url.
 
 # Notice on use
 
-This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your unity project. 
+This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project. 
