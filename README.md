@@ -46,7 +46,7 @@ Creates an instance of the script on an empty game object, a path can be specifi
 Control of time scale but with added priority control. Essentially an object can be given priority and only they are allowed to alter the time scale until the priority is given up.
 
 ### ComponentContainer
-Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file, to implement inherit on main class like you would with a monobehaviour. Then within the nested class make sure all functions (that will be called) are static.
+Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file. To implement, inherit on container class like you would with a monobehaviour.
 
 Currently supports two functions	
 
@@ -57,6 +57,8 @@ Currently supports two functions
 - Update 
 
 	Same as Unity Update, called every frame.
+
+**Make sure they are static, otherwise the code won't pick them up!**
 
 ## Monitor Break Bebug Namespace
 	using MonitorBreak.Bebug;
