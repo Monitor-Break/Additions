@@ -30,13 +30,13 @@ Creates an instance of the script on an empty game object, a path can be specifi
 Control of time scale but with added priority control. Essentially an object can be given priority and only they are allowed to alter the time scale until the priority is given up.
 
 ### ComponentContainer
-Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file, to implement inherit like you would with a monobehaviour, then within the nested class make sure all functions are static.
+Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file, to implement inherit on main class like you would with a monobehaviour. Then within the nested class make sure all functions (that will be called) are static.
 
 Currently supports two functions	
 
 - OnGenerate 
 
-	Used for setting up values of functions, called when code is complied and when script is loaded in game.
+	Used for setting up values of nested classes, called when code is complied and when script is loaded in game.
 
 - Update 
 
