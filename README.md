@@ -36,7 +36,7 @@ Implementaion of nested classes. Essentially allows a bunch of small components 
 	using MonitorBreak.Bebug;
 "Bebug" = "Better Debug"
 
-***(While this namespace is intended for debug it is currently not automatically disabled on build, this will changed when I get round to it)***
+***(While this namespace is intended for debug it is currently not automatically disabled on build, there is a static bool you can change at the top of the DebugManagment class as a temporary measure)***
 
 ### Console
 A more performant version of the unity console, also returns all objects logged. Supports multiple consoles at once and multiple console modes. To switch between console modes press the F1-F3 keys. F4 hides all consoles.
