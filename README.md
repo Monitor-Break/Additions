@@ -1,4 +1,20 @@
-# Additions
+# Notice on use
+
+This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project.
+
+Related to this, **no proper official documentation is provided**, only the text below. While documentation will likely be written at some point, currently the majority of our focus is on ***MartEMart***.
+
+Email: monitorbreakgames@gmail.com
+
+Twitter: [@Monitor_Break_](https://twitter.com/Monitor_Break_)
+
+# Installation
+
+Package should be installed/updated using the Unity Package Manager via Git URL. 
+
+[Unity Documentation on Installation from Git URL](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
+
+# Monitor Break's Additions
 
 This is a collection of all our additions to the Unity Engine, currently it includes:
 
@@ -72,13 +88,3 @@ UI graphing, allows points to be plotted on a graph that is displayed on screen.
 
 ### Convertor
 Converts a string to any type with a constructor (no enums), implemented using recursion so use in actual builds may prove to be non-performant. Utilized in the console '/' command.
-
-# Installation
-
-Package should be installed/updated using the Unity Package Manager via Git URL. 
-
-[Unity Documentation on Installation from Git URL](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
-
-# Notice on use
-
-This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project. 
