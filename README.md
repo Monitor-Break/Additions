@@ -8,6 +8,12 @@ Email: monitorbreakgames@gmail.com
 
 Twitter: [@Monitor_Break_](https://twitter.com/Monitor_Break_)
 
+# License
+
+Additions is licensed under a [MIT License](https://opensource.org/licenses/MIT) with an inserted [Commons Clause](https://commonsclause.com/). 
+
+A plain-text version of the license is included in the repository.
+
 # Installation
 
 Package should be installed/updated using the Unity Package Manager via Git URL. 
