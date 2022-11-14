@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using MonitorBreak.Bebug;
 
-namespace MonitorBreak 
+namespace MonitorBreak
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class IntializeAtRuntime : Attribute
@@ -48,25 +48,23 @@ namespace MonitorBreak
 
                         DontDestroyOnLoad(newGameObject);
 
-                        if(parentObject == null) 
+                        if (parentObject == null)
                         {
                             parentObject = new GameObject("Intialize At Runtime").transform;
+                            parentObject.gameObject.AddComponent<IntializeAtRuntimeManagment>();
                             DontDestroyOnLoad(parentObject);
                         }
 
-                        newGameObject.transform.parent = parentObject;         
+                        newGameObject.transform.parent = parentObject;
                     }
                 }
-            }  
+            }
         }
     }
 
-    public class IntializeAtRuntimeManagment : MonoBehaviour 
+    public class IntializeAtRuntimeManagment : MonoBehaviour
     {
-        public void Update() 
-        {
-            Console.Log("gaming");
-        } 
+
     }
 }
 
