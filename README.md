@@ -12,6 +12,9 @@ Twitter: [@Monitor_Break_](https://twitter.com/Monitor_Break_)
 
 Additions is licensed under a [MIT License](https://opensource.org/licenses/MIT) with an inserted [Commons Clause](https://commonsclause.com/). 
 
+**The common clause was added to prevent people simply taking the things we have coded and selling them. Using Additions in commercial products is fully
+in line with the license.**
+
 A plain-text version of the license is included in the repository.
 
 # Installation
