@@ -1,4 +1,20 @@
-# Additions
+# Notice on use
+
+This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project.
+
+Related to this, **no proper official documentation is provided**, only the text below. While documentation will maybe be written at some point, currently the majority of our focus is on ***MartEMart***.
+
+Email: monitorbreakgames@gmail.com
+
+Twitter: [@Monitor_Break_](https://twitter.com/Monitor_Break_)
+
+# Installation
+
+Package should be installed/updated using the Unity Package Manager via Git URL. 
+
+[Unity Documentation on Installation from Git URL](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
+
+# Monitor Break's Additions
 
 This is a collection of all our additions to the Unity Engine, currently it includes:
 
@@ -30,7 +46,19 @@ Creates an instance of the script on an empty game object, a path can be specifi
 Control of time scale but with added priority control. Essentially an object can be given priority and only they are allowed to alter the time scale until the priority is given up.
 
 ### ComponentContainer
-Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file, to implement inherit like you would with a monobehaviour.
+Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file. To implement, inherit on container class like you would with a monobehaviour.
+
+Currently supports two functions	
+
+- OnGenerate 
+
+	Used for setting up values of nested classes, called when code is complied and when script is loaded in game.
+
+- Update 
+
+	Same as Unity Update, called every frame.
+
+**Make sure they are static, otherwise the code won't pick them up!**
 
 ## Monitor Break Bebug Namespace
 	using MonitorBreak.Bebug;
@@ -39,7 +67,7 @@ Implementaion of nested classes. Essentially allows a bunch of small components 
 ***(While this namespace is intended for debug it is currently not automatically disabled on build, there is a static bool you can change at the top of the DebugManagment class as a temporary measure)***
 
 ### Console
-A more performant version of the unity console, also returns all objects logged. Supports multiple consoles at once and multiple console modes. To switch between console modes press the F1-F3 keys. F4 hides all consoles.
+A more performant version of the unity console, within the game itself. Also returns all objects logged for easy insertion into code. Supports multiple consoles at once and multiple console modes. To switch between console modes press the F1-F3 keys. F4 hides all consoles.
 
 Full list of supported commands:
 
@@ -61,14 +89,4 @@ Full list of supported commands:
 UI graphing, allows points to be plotted on a graph that is displayed on screen. Graph will resize to fit all points. 
 
 ### Convertor
-Converts a string to any type with a constructor (no enums), implemented using recursion so use in actual builds may prove to be non-performant. Utilized in the console '/' command.
-
-# Installation
-
-Package should be installed/updated using the Unity Package Manager via Git URL. 
-
-[Unity Documentation on Installation from Git URL](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
-
-# Notice on use
-
-This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project. 
+Converts a string to any type with a constructor (no enums)/any fundamental type, implemented using recursion so use in actual builds may prove to be non-performant. Utilized in the console '/' command.
