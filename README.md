@@ -18,6 +18,10 @@ A plain-text version of the license is included in the repository.
 
 Package should be installed/updated using the Unity Package Manager via Git URL. 
 
+```
+https://github.com/Monitor-Break/Additions.git
+```
+
 [Unity Documentation on Installation from Git URL](https://docs.unity3d.com/Manual/upm-ui-giturl.html)
 
 # Monitor Break's Additions
@@ -28,7 +32,7 @@ In "MonitorBreak" namespace
 
 	• Attributes
   
-		IntializeAtRuntime
+		- IntializeAtRuntime
     
 	• TimeManagment
   
