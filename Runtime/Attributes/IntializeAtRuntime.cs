@@ -20,6 +20,8 @@ namespace MonitorBreak
 
     public class IntializeAtRuntimeExecution : MonoBehaviour
     {
+        private static Transform parentObject = null;
+
         [RuntimeInitializeOnLoadMethod]
         private static void Main()
         {
@@ -44,6 +46,13 @@ namespace MonitorBreak
                         }
 
                         DontDestroyOnLoad(newGameObject);
+
+                        if(parentObject == null) 
+                        {
+                            parentObject = new GameObject("Intialize At Runtime").transform;
+                        }
+
+                        newGameObject.transform.parent = parentObject;         
                     }
                 }
             }  
