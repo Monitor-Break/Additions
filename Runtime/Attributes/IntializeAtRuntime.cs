@@ -50,6 +50,7 @@ namespace MonitorBreak
                         if(parentObject == null) 
                         {
                             parentObject = new GameObject("Intialize At Runtime").transform;
+                            DontDestroyOnLoad(parentObject);
                         }
 
                         newGameObject.transform.parent = parentObject;         
