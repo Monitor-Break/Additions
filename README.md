@@ -71,7 +71,7 @@ Essentially it allows you to run code only after other code has been executed.
 	using MonitorBreak.Bebug;
 "Bebug" = "Better Debug"
 
-***(While this namespace is intended for debug it is currently not automatically disabled on build, there is a static bool you can change at the top of the DebugManagment class as a temporary measure)***
+***(While this namespace is intended for debug it is currently not automatically disabled on build, there is a bool you can change at the top of the DebugManagment class as a temporary measure. However, this isn't a proper solution because all the log code will still run. We do also want the console avaliable in the builds of the game if needed so it might be the best solution right now.)***
 
 ### Console
 A more performant version of the unity console, within the game itself. Also returns all objects logged for easy insertion into code. Supports multiple consoles at once and multiple console modes. To switch between console modes press the F1-F3 keys. F4 hides all consoles.
