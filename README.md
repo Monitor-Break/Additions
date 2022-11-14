@@ -28,6 +28,8 @@ In "MonitorBreak" namespace
   
 	• ComponentContainer
   
+	• CodeSuspender
+  
 In "MonitorBreak.Bebug" namespace
 
 	• Console
@@ -59,6 +61,11 @@ Currently supports two functions
 	Same as Unity Update, called every frame.
 
 **Make sure they are static, otherwise the code won't pick them up!**
+
+### CodeSuspender
+Similar to an event but everything that is registered with the event also passes itself. When the suspender is triggered all objects registered are given 'priority', after they have finished executing they should run the 'Done()' function (passing themselves). Once all registered objects have said they are done (or on trigger if no objects are registered) then a method passed in the CodeSuspender constructor is called.
+
+Essentially it allows you to run code only after other code has been executed.
 
 ## Monitor Break Bebug Namespace
 	using MonitorBreak.Bebug;
