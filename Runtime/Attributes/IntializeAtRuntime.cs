@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using System.Reflection;
+using MonitorBreak.Bebug;
 
 namespace MonitorBreak 
 {
@@ -58,6 +59,14 @@ namespace MonitorBreak
                 }
             }  
         }
+    }
+
+    public class IntializeAtRuntimeManagment : MonoBehaviour 
+    {
+        public void Update() 
+        {
+            Console.Log("gaming");
+        } 
     }
 }
 
