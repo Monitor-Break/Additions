@@ -41,7 +41,7 @@ namespace MonitorBreak
             onNoPriority?.Invoke();
         }
 
-        public static void SetTimeScale(float newTimeScale, object self = null)
+        public static void SetTimeScale(float newTimeScale, object self)
         {
             if (objectWithPriority != null && objectWithPriority != self)
             {
