@@ -13,6 +13,11 @@ namespace MonitorBreak
             objectWithPriority = self;
         }
 
+        public static bool HasPriority(object self) 
+        {
+            return objectWithPriority == self;
+        }
+
         public static void ReleasePriority(object self) 
         {
             if(objectWithPriority != self) 
