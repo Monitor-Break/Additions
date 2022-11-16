@@ -8,6 +8,8 @@ namespace MonitorBreak
     {
         private static object objectWithPriority = null;
 
+        public static Notify onNoPriority = new Notify();
+
         public static void SetPriority(object self)
         {
             objectWithPriority = self;
@@ -36,6 +38,7 @@ namespace MonitorBreak
         public static void ReleasePriority()
         {
             objectWithPriority = null;
+            onNoPriority?.Invoke();
         }
 
         public static void SetTimeScale(float newTimeScale, object self = null)
@@ -49,5 +52,7 @@ namespace MonitorBreak
             Time.timeScale = newTimeScale;
         }
     }
+
+    public delegate void Notify();
 }
 
