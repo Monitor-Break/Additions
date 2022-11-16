@@ -8,7 +8,7 @@ namespace MonitorBreak
     {
         private static object objectWithPriority = null;
 
-        public static Notify onNoPriority = new Notify();
+        public static Notify onNoPriority;
 
         public static void SetPriority(object self)
         {
