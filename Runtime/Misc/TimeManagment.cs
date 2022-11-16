@@ -8,19 +8,24 @@ namespace MonitorBreak
     {
         private static object objectWithPriority = null;
 
-        public static void SetPriority(object self) 
+        public static void SetPriority(object self)
         {
             objectWithPriority = self;
         }
 
-        public static bool HasPriority(object self) 
+        public static bool HasPriority(object self)
         {
             return objectWithPriority == self;
         }
 
-        public static void ReleasePriority(object self) 
+        public static bool AnythingHasPriority()
         {
-            if(objectWithPriority != self) 
+            return objectWithPriority != null;
+        }
+
+        public static void ReleasePriority(object self)
+        {
+            if (objectWithPriority != self)
             {
                 return;
             }
@@ -28,14 +33,14 @@ namespace MonitorBreak
             ReleasePriority();
         }
 
-        public static void ReleasePriority() 
+        public static void ReleasePriority()
         {
             objectWithPriority = null;
         }
 
-        public static void SetTimeScale(float newTimeScale, object self = null) 
+        public static void SetTimeScale(float newTimeScale, object self = null)
         {
-            if(objectWithPriority != null && objectWithPriority != self) 
+            if (objectWithPriority != null && objectWithPriority != self)
             {
                 //An object has priority and it is not the one passed
                 return;
