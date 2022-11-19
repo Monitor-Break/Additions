@@ -75,7 +75,7 @@ namespace MonitorBreak.Bebug
         public Console(string name)
         {
             SetName(name);
-            DebugManagment.AddConsole(this);
+            BebugManagment.AddConsole(this);
             currentOutputColor = new Color(0.8f, 0.8f, 0.8f);
         }
 
@@ -206,11 +206,11 @@ namespace MonitorBreak.Bebug
             }
             else if (inputString.ToLower() == "new")
             {
-                DebugManagment.MakeNewConsoleWhileInConsoleLoop();
+                BebugManagment.MakeNewConsoleWhileInConsoleLoop();
             }
             else if (inputString.ToLower() == "exit")
             {
-                DebugManagment.RemoveConsole(output);
+                BebugManagment.RemoveConsole(output);
                 return;
             }
             else  //If there is no modifier print something to console
@@ -290,12 +290,12 @@ namespace MonitorBreak.Bebug
                 {
                     if (currentConsoleState == ConsoleState.Sidebar)
                     {
-                        consoleDimensions = new Vector2(consoleDimensions.x * 0.3f, consoleDimensions.y / DebugManagment.NumberOfConsoles());
-                        offset.y = consoleDimensions.y * ((DebugManagment.NumberOfConsoles() - 1.0f) - indexInConsoleList);
+                        consoleDimensions = new Vector2(consoleDimensions.x * 0.3f, consoleDimensions.y / BebugManagment.NumberOfConsoles());
+                        offset.y = consoleDimensions.y * ((BebugManagment.NumberOfConsoles() - 1.0f) - indexInConsoleList);
                     }
                     else
                     {
-                        consoleDimensions.x /= DebugManagment.NumberOfConsoles();
+                        consoleDimensions.x /= BebugManagment.NumberOfConsoles();
                         offset.x = consoleDimensions.x * (indexInConsoleList);
                     }
 
@@ -338,7 +338,7 @@ namespace MonitorBreak.Bebug
                         GUI.Box(textSize, GUIContent.none);
                     }
 
-                    GUI.skin.box.normal.background = DebugManagment.baseTexture;
+                    GUI.skin.box.normal.background = BebugManagment.baseTexture;
 
                     UpdateOutputText(tempCopy, finalText);
                     //Highlights
@@ -358,7 +358,7 @@ namespace MonitorBreak.Bebug
                     outputText = outputText.Substring(difference, maxCharacters);
                 }
 
-                if (currentConsoleState == ConsoleState.FullScreen && DebugManagment.IsActiveConsole(indexInConsoleList))
+                if (currentConsoleState == ConsoleState.FullScreen && BebugManagment.IsActiveConsole(indexInConsoleList))
                 {
                     Rect inputFieldRect = new Rect(offset.x, consoleDimensions.y - (textInputHeight), consoleDimensions.x, textInputHeight);
                     GUI.Box(inputFieldRect, "");
@@ -454,7 +454,7 @@ namespace MonitorBreak.Bebug
         {
             Highlight newHighlight = new Highlight();
             //Texture
-            newHighlight.mainTex = DebugManagment.GenerateTexture(color);
+            newHighlight.mainTex = BebugManagment.GenerateTexture(color);
             //Displacement
             newHighlight.displacement = displacement;
             //Size
@@ -634,7 +634,7 @@ namespace MonitorBreak.Bebug
 
         public static void UpdateState(ConsoleState newState)
         {
-            if (!DebugManagment.DebugEnabled)
+            if (!BebugManagment.DebugEnabled)
             {
                 return;
             }
@@ -663,7 +663,7 @@ namespace MonitorBreak.Bebug
             // #if UNITY_EDITOR
             // output = $"{output}\n{System.Environment.StackTrace}";   //Incompatible with highlighting
             // #endif     
-            Console currentConsole = DebugManagment.GetConsole(consoleNumber);
+            Console currentConsole = BebugManagment.GetConsole(consoleNumber);
             currentConsole.OutputLine($"{errorType.ToString()} ERROR: {output}");
             currentConsole.AutohighlightLine(output.ToString(), Color.red);
             return output;
@@ -680,7 +680,7 @@ namespace MonitorBreak.Bebug
             }
 #endif
 
-            DebugManagment.GetConsole(consoleNumber).OutputLine(outputString);
+            BebugManagment.GetConsole(consoleNumber).OutputLine(outputString);
             return output;
         }
 

@@ -76,9 +76,6 @@ namespace MonitorBreak.Bebug
 
         private void Update()
         {
-            //float value = Mathf.Sin(Time.time *20.0f) * 2.0f;
-            //graphs[0].AddNewValue(value, value - 0.1f);
-
             if ((Input.GetKeyDown(KeyCode.F1) || Input.GetKeyDown(KeyCode.F2) || Input.GetKeyDown(KeyCode.F3)) && NumberOfConsoles() == 0)
             {
                 new Console(ConsoleName());
