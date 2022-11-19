@@ -104,6 +104,7 @@ namespace MonitorBreak.Bebug
 
                 //Get class
                 string className = stringParts[0];
+                Console.Log(className);
                 Type type = Type.GetType(className);
 
                 if (type == null)
