@@ -104,8 +104,17 @@ namespace MonitorBreak.Bebug
 
                 //Get class
                 string className = stringParts[0];
-                Console.Log(className);
-                Type type = Type.GetType(className);
+                Type type = null;
+                foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) 
+                {
+                    foreach (Type possibleMatch in assembly.GetTypes()) 
+                    {
+                        if(possibleMatch.Name == className) 
+                        {
+                            type = possibleMatch;
+                        }
+                    }
+                }
 
                 if (type == null)
                 {
