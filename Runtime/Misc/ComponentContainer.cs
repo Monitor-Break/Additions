@@ -123,6 +123,7 @@ namespace MonitorBreak
             smallComponents[index] = sc;
         }
 
+#if UNITY_EDITOR
         [UnityEditor.Callbacks.DidReloadScripts]
         public static void RegenerateOnRecompile()
         {
@@ -132,8 +133,10 @@ namespace MonitorBreak
                 cc.GenerateSmallComponentsList();
             }
         }
+#endif
     }
 
+#if UNITY_EDITOR
     [CustomEditor(typeof(ComponentContainer))]
     [CanEditMultipleObjects]
     public class ComponentContainerEditor : Editor
@@ -201,4 +204,5 @@ namespace MonitorBreak
             EditorGUI.DrawRect(rect, new Color(0.1f, 0.1f, 0.1f, 1));
         }
     }
+#endif
 }
