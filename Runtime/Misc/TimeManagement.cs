@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MonitorBreak
 {
-    public class TimeManagment
+    public class TimeManagement
     {
         private static object objectWithPriority = null;
 

@@ -42,7 +42,7 @@ namespace MonitorBreak.Bebug
             outputTexture = new Texture2D((int)size.x, (int)size.y);
             UpdateGraph();
 
-            BebugManagment.AddGraph(this);
+            BebugManagement.AddGraph(this);
         }
 
         public void ClearGraph()

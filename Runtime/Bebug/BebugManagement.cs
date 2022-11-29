@@ -5,7 +5,7 @@ using UnityEngine;
 namespace MonitorBreak.Bebug
 {
     [IntializeAtRuntime]
-    public class BebugManagment : MonoBehaviour
+    public class BebugManagement : MonoBehaviour
     {
         public const bool DebugEnabled = true;
 
