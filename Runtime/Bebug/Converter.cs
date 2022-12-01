@@ -9,24 +9,23 @@ namespace MonitorBreak.Bebug
 {
     public class Converter
     {
-        public static object Convert(object toConvert, Type type)
+        public static object Convert(string toConvert, Type type)
         {
-            if (type == typeof(object))
+            if (type == typeof(string))
             {
                 return toConvert;
             }
             else
             {
-                string conversionString = toConvert.ToString();
                 try
                 {
                     //* Fundamental types only *//
                     TypeConverter typeConverter = TypeDescriptor.GetConverter(type);
-                    return typeConverter.ConvertFromString(conversionString);
+                    return typeConverter.ConvertFromString(toConvert);
                 }
                 catch
                 {
-                    string inbetweenString = conversionString.Substring(conversionString.IndexOf('(') + 1);
+                    string inbetweenString = toConvert.Substring(toConvert.IndexOf('(') + 1);
                     string[] objectArguments = inbetweenString.Substring(0, inbetweenString.Length - 1).Split(',');
                     //* Get the generic constructor and pass the parameters entered, pass them through this function again and again until we get to fundamental types *//
                     ParameterInfo[] pars = type.GetConstructors()[0].GetParameters();
