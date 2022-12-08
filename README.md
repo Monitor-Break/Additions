@@ -1,6 +1,6 @@
 # Notice on use
 
-This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project.
+### This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project.
 
 Related to this, **no proper official documentation is provided**, only the text below. While documentation will maybe be written at some point, currently the majority of our focus is on ***MartEMart***.
 
