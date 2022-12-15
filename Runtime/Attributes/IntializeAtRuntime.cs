@@ -51,7 +51,7 @@ namespace MonitorBreak
                         if (parentObject == null)
                         {
                             parentObject = new GameObject("Intialize At Runtime").transform;
-                            parentObject.gameObject.AddComponent<IntializeAtRuntimeManagment>();
+                            parentObject.gameObject.AddComponent<IntializeAtRuntimeManagement>();
                             DontDestroyOnLoad(parentObject);
                         }
 
@@ -62,7 +62,7 @@ namespace MonitorBreak
         }
     }
 
-    public class IntializeAtRuntimeManagment : MonoBehaviour
+    public class IntializeAtRuntimeManagement : MonoBehaviour
     {
 
     }

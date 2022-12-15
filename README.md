@@ -1,6 +1,6 @@
 # Notice on use
 
-This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project.
+### This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project.
 
 Related to this, **no proper official documentation is provided**, only the text below. While documentation will maybe be written at some point, currently the majority of our focus is on ***MartEMart***.
 
@@ -37,7 +37,7 @@ In "MonitorBreak" namespace
   
 		- IntializeAtRuntime
     
-	• TimeManagment
+	• TimeManagement
   
 	• ComponentContainer
   
@@ -57,7 +57,7 @@ In "MonitorBreak.Bebug" namespace
 #### IntializeAtRuntime
 Creates an instance of the script on an empty game object, a path can be specified which will load an object from resources. This is intended to be used to load a version of the script with specific values/references.
 
-### Time Managment
+### Time Management
 Control of time scale but with added priority control. Essentially an object can be given priority and only they are allowed to alter the time scale until the priority is given up.
 
 ### ComponentContainer
@@ -84,7 +84,7 @@ Essentially it allows you to run code only after other code has been executed.
 	using MonitorBreak.Bebug;
 "Bebug" = "Better Debug"
 
-***(While this namespace is intended for debug it is currently not automatically disabled on build, there is a bool you can change at the top of the DebugManagment class as a temporary measure. However, this isn't a proper solution because all the log code will still run. We do also want the console avaliable in the builds of the game if needed so it might be the best solution right now.)***
+***(While this namespace is intended for debug it is currently not automatically disabled on build, there is a bool you can change at the top of the BebugManagement class as a temporary measure. However, this isn't a proper solution because all the log code will still run. We do also want the console avaliable in the builds of the game if needed so it might be the best solution right now.)***
 
 ### Console
 A more performant version of the unity console, within the game itself. Also returns all objects logged for easy insertion into code. Supports multiple consoles at once and multiple console modes. To switch between console modes press the F1-F3 keys. F4 hides all consoles.
