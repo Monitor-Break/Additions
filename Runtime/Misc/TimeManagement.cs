@@ -52,7 +52,5 @@ namespace MonitorBreak
             Time.timeScale = newTimeScale;
         }
     }
-
-    public delegate void Notify();
 }
 
