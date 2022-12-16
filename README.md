@@ -80,6 +80,11 @@ Similar to an event but everything that is registered with the event also passes
 
 Essentially it allows you to run code only after other code has been executed.
 
+### SavingAndLoadingUtility
+Allows for the saving of arbitrary fields (as long as they are both static and public) by utilizing the **[SaveThis]** attribute. 'Save()' is called to actually save the data (into a .data file), with 'Load()' used to load the data. 'Load()' is automatically run on application load.
+
+The location to save the file is determined by 'Application.persistentDataPath' and the file is called 'generalData'.
+
 ## Monitor Break Bebug Namespace
 	using MonitorBreak.Bebug;
 "Bebug" = "Better Debug"
