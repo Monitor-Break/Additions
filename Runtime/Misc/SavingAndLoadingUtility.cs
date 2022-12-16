@@ -70,7 +70,6 @@ namespace MonitorBreak
             public string value;
         }
 
-        [RuntimeInitializeOnLoadMethod]
         public static void Load()
         {
             //All the entries in the saved data
