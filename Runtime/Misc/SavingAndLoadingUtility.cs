@@ -46,6 +46,12 @@ namespace MonitorBreak
                         SaveThis saveThis = (SaveThis)field.GetCustomAttribute(typeof(SaveThis), false);
                         if (saveThis != null)
                         {
+                            if (!field.IsStatic) 
+                            {
+                                Debug.LogError($"{field.Name} is not static, it will not be saved");
+                                continue;
+                            }
+
                             //If the field has a SaveThis attribute and a line about the field to the final file
                             textToSave += ConvertToString(type, field);
                         }
