@@ -1,20 +1,20 @@
 {
-  "name": "com.monitorbreak.additions",
-  "version": "1.2.0",
-  "displayName": "Additions",
-  "description": "This is a collection of all our additions to the Unity Engine, currently it includes:\n\u2022 General\n\t\u2022 Attributes\n\t\tIntializeAtRuntime\n\t\u2022 TimeManagement\n\t\u2022 ComponentContainer\n\t\u2022 CodeSuspender\n\u2022 Bebug\n\t\u2022 Console\n\t\u2022 Graph\n\t\u2022 Convertor",
-  "unity": "2019.2",
-  "keywords": [
-    "Bebug",
-    "Tools",
-    "Console",
-    "Graph",
-    "Attributes"
-  ],
-  "author": {
-    "name": "Monitor Break",
-    "email": "monitorbreakgames@gmail.com"
-  },
-  "type": "library",
-  "hideInEditor": false
+    "name": "com.monitorbreak.additions",
+    "version": "1.2.0",
+    "displayName": "Additions",
+    "description": "This is a collection of all our additions to the Unity Engine, currently it includes:\n\u2022 General\n\t\u2022 Attributes\n\t\tIntializeAtRuntime\n\t\u2022 TimeManagement\n\t\u2022 ComponentContainer\n\t\u2022 CodeSuspender\n\t\u2022 SavingAndLoadingUtility\n\u2022 Bebug\n\t\u2022 Console\n\t\u2022 Graph\n\t\u2022 Convertor",
+    "unity": "2019.2",
+    "keywords": [
+        "Bebug",
+        "Tools",
+        "Console",
+        "Graph",
+        "Attributes"
+    ],
+    "author": {
+        "name": "Monitor Break",
+        "email": "monitorbreakgames@gmail.com"
+    },
+    "type": "library",
+    "hideInEditor": false
 }
