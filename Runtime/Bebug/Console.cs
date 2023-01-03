@@ -17,6 +17,13 @@ namespace MonitorBreak.Bebug
             *! Text that goes over one line does not work very well (most of the text isn't shown)
         **/
 
+        public Console(string name)
+        {
+            SetName(name);
+            BebugManagement.AddConsole(this);
+            currentOutputColor = new Color(0.8f, 0.8f, 0.8f);
+        }
+
         private string consoleName;
         public void SetName(string name)
         {
@@ -72,12 +79,20 @@ namespace MonitorBreak.Bebug
             return indexInConsoleList;
         }
 
-        public Console(string name)
+        //Custom commands
+        public struct CustomCommand
         {
-            SetName(name);
-            BebugManagement.AddConsole(this);
-            currentOutputColor = new Color(0.8f, 0.8f, 0.8f);
+            public string identifier;
+            public MethodInfo method;
         }
+
+        private static List<CustomCommand> customCommands = new List<CustomCommand>();
+
+        public static void SetCustomCommands(List<CustomCommand> newCustomCommands)
+        {
+            customCommands = newCustomCommands;
+        }
+        //
 
         public static void Execute(string inputString, Console output = null)
         {
@@ -86,142 +101,43 @@ namespace MonitorBreak.Bebug
             {
                 return;
             }
-            //Validate string
+            //
+
+            string cachedInputString = inputString;
+            inputString = inputString.ToLower();
 
             //Execute Command
-            string result = "";
 
-            if (inputString[0] == '/')  //Execute an arbitrary static function
+            //If a custom command has been entered execute it here
+            foreach(CustomCommand command in customCommands)
             {
-                string commandString = inputString.Substring(1);
-                int firstDotIndex = commandString.IndexOf('.');
-                if (firstDotIndex < 0)
+                if(command.identifier == inputString)
                 {
-                    LogError($"No function entered", ErrorTypes.CannotExecute, output.GetConsoleIndex());
+                    command.method.Invoke(null, null);
                     return;
-                }
-                string[] stringParts = new string[] { commandString.Substring(0, firstDotIndex), commandString.Substring(firstDotIndex + 1) };
-
-                //Get class
-                string className = stringParts[0];
-                Type type = null;
-                foreach(Assembly assembly in AppDomain.CurrentDomain.GetAssemblies()) 
-                {
-                    foreach (Type possibleMatch in assembly.GetTypes()) 
-                    {
-                        if(possibleMatch.Name == className) 
-                        {
-                            type = possibleMatch;
-                        }
-                    }
-                }
-
-                if (type == null)
-                {
-                    LogError($"No class with name {className}", ErrorTypes.CannotExecute, output.GetConsoleIndex());
-                    return;
-                }
-                else
-                {
-                    //Get function
-                    int firstBracketIndex = stringParts[1].IndexOf('(');
-                    string functionName = stringParts[1].Substring(0, firstBracketIndex);
-
-                    MethodInfo method = type.GetMethod(functionName, BindingFlags.Public | BindingFlags.Static);
-
-                    if (method == null)
-                    {
-                        LogError($"No function {functionName} attached to class {className}", ErrorTypes.CannotExecute, output.GetConsoleIndex());
-                        return;
-                    }
-                    else
-                    {
-                        //Get list of parameters
-                        ParameterInfo[] pars = method.GetParameters();
-                        List<Type> parameterTypes = new List<Type>();
-                        foreach (ParameterInfo info in pars)
-                        {
-                            parameterTypes.Add(info.ParameterType);
-                        }
-
-                        //Pass arguments
-                        string argumentString = (stringParts[1].Remove(stringParts[1].Length - 1)).Substring(firstBracketIndex + 1);
-
-                        argumentString = argumentString.Replace("new", "");
-                        argumentString = argumentString.Replace(" ", "");
-
-                        List<String> arguments = new List<String>();
-                        int stringIndex = 0;
-                        int lastStringEndIndex = 0;
-                        int currentDepth = 0;
-                        while (stringIndex < argumentString.Length)
-                        {
-                            char currentChar = argumentString[stringIndex];
-                            if (currentChar == '(') currentDepth++;
-                            else if (currentChar == ')') currentDepth--;
-
-                            if (currentDepth == 0 && currentChar == ',')
-                            {
-                                arguments.Add(argumentString.Substring(lastStringEndIndex, (stringIndex - lastStringEndIndex)));
-                                lastStringEndIndex = stringIndex + 1;
-                            }
-
-                            stringIndex++;
-                        }
-
-                        arguments.Add(argumentString.Substring(lastStringEndIndex)); //Add remainder of string
-
-                        if (arguments.Count != parameterTypes.Count)
-                        {
-                            LogError($"Number of supplied arguments does not match number of parameters, {arguments.Count} and {parameterTypes.Count}", ErrorTypes.CannotExecute, output.GetConsoleIndex());
-                            return;
-                        }
-
-                        object[] argumentsFinalArray = new object[arguments.Count];
-
-                        for (int i = 0; i < arguments.Count; i++)
-                        {
-                            //Convert value to actual type
-                            //Log($"{parameterTypes[i]}   -   {arguments[i]}");
-
-                            argumentsFinalArray[i] = Converter.Convert(arguments[i], parameterTypes[i]);
-                        }
-
-                        object methodResult = method.Invoke(null, argumentsFinalArray);
-
-                        if (methodResult != null)
-                        {
-                            result = methodResult.ToString();
-                        }
-                    }
                 }
             }
-            else if (inputString.ToLower() == "hide")
+   
+            if (inputString == "hide")
             {
                 HideAllConsoles();
             }
-            else if (inputString.ToLower() == "clear" || inputString[0] == '.')
+            else if (inputString == "clear" || inputString[0] == '.')
             {
                 output.ResetConsole();
             }
-            else if (inputString.ToLower() == "new")
+            else if (inputString == "new")
             {
                 BebugManagement.MakeNewConsoleWhileInConsoleLoop();
             }
-            else if (inputString.ToLower() == "exit")
+            else if (inputString == "exit")
             {
                 BebugManagement.RemoveConsole(output);
                 return;
             }
-            else  //If there is no modifier print something to console
+            else  //If there is no modifier print input string to console
             {
-                result = inputString;
-            }
-
-            //Output result
-            if (!string.IsNullOrEmpty(result))
-            {
-                Log(result, output.GetConsoleIndex());
+                Log(cachedInputString, output.GetConsoleIndex());
             }
         }
 
