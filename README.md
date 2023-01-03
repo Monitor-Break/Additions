@@ -97,8 +97,6 @@ A more performant version of the unity console, within the game itself. Also ret
 Full list of supported commands:
 
         '[Text]' Print something to console
-
-        '/[Class Name].[Function Name]([Arguments])' Execute an arbitrary static function
 	
         '.' or 'clear' clear console
 	
@@ -110,8 +108,8 @@ Full list of supported commands:
 	
         TAB switch between consoles
 	
+### ConsoleCMD
+An attribute that allows for custom commands that will run a public, static function. The function cannot take any arguments.
+
 ### Graph
 UI graphing, allows points to be plotted on a graph that is displayed on screen. Graph will resize to fit all points. 
-
-### Convertor
-Converts a string to any type with a constructor (no enums)/any fundamental type, implemented using recursion so use in actual builds may prove to be non-performant. Utilized in the console '/' command.
