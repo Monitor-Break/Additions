@@ -16,7 +16,7 @@ public static class HierarchyAdditions
 
     static HierarchyAdditions()
     {
-        EditorApplication.hierarchyWindowItemOnGUI += DrawHeaders;
+        EditorApplication.hierarchyWindowItemOnGUI += Draw;
     }
 
     [MenuItem("GameObject/Heirarchy/Create New Headers Box", false, 0)]
@@ -42,7 +42,7 @@ public static class HierarchyAdditions
     private static bool firstPartOfHeaderFound = false;
     private static string firstPartOfHeaderName = "";
     private static int firstID = int.MaxValue;
-    private static void DrawHeaders(int instanceID, Rect selectionRect)
+    private static void Draw(int instanceID, Rect selectionRect)
     {
         if(firstID == int.MaxValue)
         {
@@ -95,6 +95,15 @@ public static class HierarchyAdditions
                     EditorGUI.DrawRect(rightRect, boxColor);
                     firstPartOfHeaderFound = false;
                 }
+            }
+            else if(heirarchyGameObject.TryGetComponent<HierarchyColourTag>(out HierarchyColourTag hct))
+            {
+                float cachedX = selectionRect.x;
+                selectionRect.width = 10;
+                selectionRect.x = Screen.width - 5;
+                EditorGUI.DrawRect(selectionRect, hct.tagColour);
+                selectionRect.x = 0;
+                EditorGUI.DrawRect(selectionRect, hct.tagColour);
             }
         }
     }
