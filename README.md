@@ -108,6 +108,8 @@ Full list of supported commands:
 	
         TAB switch between consoles
 	
+WARNING: Currently, there is an issue with logging every frame, causing performance issues. Will be fixed at some point promise!
+	
 ### ConsoleCMD
 An attribute that allows for custom commands that will run a public, static function. The function cannot take any arguments.
 
