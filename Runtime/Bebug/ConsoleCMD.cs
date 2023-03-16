@@ -12,10 +12,12 @@ namespace MonitorBreak.Bebug
     public class ConsoleCMD : Attribute
     {
         public string commandString;
+        public string description;
 
-        public ConsoleCMD(string commandString)
+        public ConsoleCMD(string commandString, string description = "")
         {
             this.commandString = commandString;
+            this.description = description;
         }
     }
 
@@ -42,7 +44,7 @@ namespace MonitorBreak.Bebug
 
                         if(ccmd != null)
                         {
-                            ccList.Add(new Console.CustomCommand(){ identifier = ccmd.commandString.ToLower(), method = method});
+                            ccList.Add(new Console.CustomCommand(){ identifier = ccmd.commandString.ToLower(), desc = ccmd.description, method = method});
                         }
                     }
                 }

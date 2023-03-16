@@ -83,6 +83,7 @@ namespace MonitorBreak.Bebug
         public struct CustomCommand
         {
             public string identifier;
+            public string desc;
             public MethodInfo method;
         }
 
@@ -126,14 +127,21 @@ namespace MonitorBreak.Bebug
    
             if(inputString == "commands")
             {
-                string commandsOutput = "\nCustom Commands:\n";
+                string commandsOutput = "\n\n";
 
                 foreach(CustomCommand command in customCommands)
                 {
-                    commandsOutput += command.identifier + " - " + command.method.Name + "\n";
+                    string desc = command.desc;
+
+                    if (string.IsNullOrEmpty(desc))
+                    {
+                        desc = $"Method Name is '{command.method.Name}' ";
+                    }
+
+                    commandsOutput += " - " + command.identifier + "\n      " + desc + "\n\n";
                 }
 
-                Log(commandsOutput, output.GetConsoleIndex());
+                Log(commandsOutput, output.GetConsoleIndex(), false);
             }
             else if (inputString == "hide")
             {
