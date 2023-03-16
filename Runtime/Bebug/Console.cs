@@ -106,19 +106,36 @@ namespace MonitorBreak.Bebug
             string cachedInputString = inputString;
             inputString = inputString.ToLower();
 
-            //Execute Command
+            string[] inputStringSplit = inputString.Split(' ');
 
+            //Execute Command
             //If a custom command has been entered execute it here
             foreach(CustomCommand command in customCommands)
             {
-                if(command.identifier == inputString)
+                if(command.identifier == inputStringSplit[0])
                 {
-                    command.method.Invoke(null, null);
+                    string[] arguments = null;
+                    if(inputStringSplit.Length > 1)
+                    {
+                        arguments = inputStringSplit[1].Split(',');
+                    }
+                    command.method.Invoke(null, arguments);
                     return;
                 }
             }
    
-            if (inputString == "hide")
+            if(inputString == "commands")
+            {
+                string commandsOutput = "\nCustom Commands:\n";
+
+                foreach(CustomCommand command in customCommands)
+                {
+                    commandsOutput += command.identifier + " - " + command.method.Name + "\n";
+                }
+
+                Log(commandsOutput, output.GetConsoleIndex());
+            }
+            else if (inputString == "hide")
             {
                 HideAllConsoles();
             }
