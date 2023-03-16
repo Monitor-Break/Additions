@@ -127,7 +127,7 @@ namespace MonitorBreak.Bebug
    
             if(inputString == "commands")
             {
-                string commandsOutput = "\n\n";
+                string commandsOutput = " -- Custom Commands -- \n\n";
 
                 foreach(CustomCommand command in customCommands)
                 {
