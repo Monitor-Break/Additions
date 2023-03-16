@@ -50,6 +50,7 @@ namespace MonitorBreak
             smallComponents = new List<smallComponent>();
             Type t = this.GetType();
             Type[] nestedTypes = t.GetNestedTypes();
+
             //Generate list of smallComponent variable for later checks
             FieldInfo[] scFields = typeof(smallComponent).GetFields().Where(x => x.FieldType == typeof(MethodInfo)).ToArray();
             foreach (Type nested in nestedTypes)
@@ -137,7 +138,7 @@ namespace MonitorBreak
     }
 
 #if UNITY_EDITOR
-    [CustomEditor(typeof(ComponentContainer))]
+    [CustomEditor(typeof(ComponentContainer), true)]
     [CanEditMultipleObjects]
     public class ComponentContainerEditor : Editor
     {
