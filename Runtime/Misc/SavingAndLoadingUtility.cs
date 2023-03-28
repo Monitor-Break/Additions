@@ -24,6 +24,11 @@ namespace MonitorBreak
         //Generate a line within the file
         private static string ConvertToString(Type type, FieldInfo field)
         {
+            if (field.GetValue(null) == null)
+            {
+                return "";
+            }
+
             return $"{type.Name}{seperatorChar}{field.Name}{seperatorChar}{field.GetValue(null).ToString()}\n";
         }
 
