@@ -83,8 +83,10 @@ namespace MonitorBreak.Bebug
         public struct CustomCommand
         {
             public string identifier;
-            public string desc;
             public MethodInfo method;
+
+            public string desc;
+            public string argumentsString;
         }
 
         private static List<CustomCommand> customCommands = new List<CustomCommand>();
@@ -138,7 +140,7 @@ namespace MonitorBreak.Bebug
                         desc = $"Method Name is '{command.method.Name}' ";
                     }
 
-                    commandsOutput += " - " + command.identifier + "\n      " + desc + "\n\n";
+                    commandsOutput += "   " + command.identifier.ToUpperInvariant() + $" {command.argumentsString}" + "\n      " + desc + "\n\n";
                 }
 
                 Log(commandsOutput, output.GetConsoleIndex(), false);

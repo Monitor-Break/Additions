@@ -44,7 +44,22 @@ namespace MonitorBreak.Bebug
 
                         if(ccmd != null)
                         {
-                            ccList.Add(new Console.CustomCommand(){ identifier = ccmd.commandString.ToLower(), desc = ccmd.description, method = method});
+                            string argumentsString = "";
+
+                            ParameterInfo[] parameters = method.GetParameters();
+                            if(parameters.Length > 0)
+                            {
+                                argumentsString = "         [ ";
+
+                                foreach (ParameterInfo parameter in parameters)
+                                {
+                                    argumentsString += $"{parameter.Name}: {parameter.ParameterType.ToString().ToUpperInvariant()} ";
+                                }
+
+                                argumentsString += "]";
+                            }
+
+                            ccList.Add(new Console.CustomCommand(){ identifier = ccmd.commandString.ToLower(), desc = ccmd.description, method = method, argumentsString = argumentsString});
                         }
                     }
                 }
