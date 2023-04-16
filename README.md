@@ -58,7 +58,7 @@ In "MonitorBreak.Bebug" namespace
 Creates an instance of the script on an empty game object, a path can be specified which will load an object from resources. This is intended to be used to load a version of the script with specific values/references.
 
 ### Time Management
-Control of time scale but with added priority control. Essentially an object can be given priority and only they are allowed to alter the time scale until the priority is given up.
+Control of time-scale but with added priority control. Essentially a time-scale is passed with a given priority, alongside an object for identification so it can be removed later. The time-scale is automatically reset to the default when a scene loads.
 
 ### ComponentContainer
 Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file. To implement, inherit on container class like you would with a monobehaviour.
