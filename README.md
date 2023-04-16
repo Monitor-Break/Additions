@@ -33,23 +33,31 @@ This is a collection of all our additions to the Unity Engine, currently it incl
 
 In "MonitorBreak" namespace
 
-	• Attributes
+	Attributes
   
 		- IntializeAtRuntime
-    
+		
 	• TimeManagement
   
 	• ComponentContainer
   
 	• CodeSuspender
   
+	• CameraHelper
+  
 In "MonitorBreak.Bebug" namespace
 
+	Attributes
+  
+		- ConsoleCMD
+		
 	• Console
   
 	• Graph
-  
-	• Convertor
+	
+In "MonitorBreak.MB2D" namespace
+
+	• PixelatedRender
 	
 ## Monitor Break Namespace
 	using MonitorBreak;
@@ -87,6 +95,9 @@ Allows for the saving of arbitrary fields (as long as they are both static and p
 
 The location to save the file is determined by 'Application.persistentDataPath' and the file is called 'generalData'.
 
+### CameraHelper
+Standard Camera helper script, allows code to be executed after the camera's position has been updated utilizing events. Also includes a priority system similar to TimeManagement but for the position of the camera instead.
+
 ## Monitor Break Bebug Namespace
 	using MonitorBreak.Bebug;
 "Bebug" = "Better Debug"
@@ -121,3 +132,15 @@ Extra command included alongside:
 
 ### Graph
 UI graphing, allows points to be plotted on a graph that is displayed on screen. Graph will resize to fit all points. 
+
+## Monitor Break 2D Namespace
+	using MonitorBreak.MB2D;
+
+### PixelatedRender
+Takes an output from a low-res camera to displays it onto a quad, allowing for pixel perfect effects. Requires some set up to work properly;
+
+- First, you will need a layer that only the low-res camera will render (nothing needs to be put on this layer, objects will be moved automatically to the designated layer). You will need to specify this layer on the component, the default is 8.
+- Second, you will need a camera that has a culling mask set up to correctly target only the low-res layer.
+- Last, you will need a 3D quad that uses a material that has a "_MainTex" property, the standard sprite un-lit should work.
+
+(A different quad will be needed for each instance of the component, however the camera can be re-used for each.)
