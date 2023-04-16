@@ -60,7 +60,7 @@ Creates an instance of the script on an empty game object, a path can be specifi
 ### Time Management
 Control of time-scale but with added priority control. Essentially a time-scale is passed with a given priority, alongside an object for identification so it can be removed later. The time-scale is automatically reset to the default when a scene loads.
 
-*(When the full-screen console is opened it will set the time-scale to zero automatically. This is **not** done using this system and so will overwrite the current time scale and set it back to 1.0f when the window is closed)*
+*(When the full-screen console is opened it will set the time-scale to zero automatically. This uses this system and has a priority of 100, currently if you load a scene using a console command the time-scale will reset and not be zero even if the full-screen console is open.)*
 
 ### ComponentContainer
 Implementaion of nested classes. Essentially allows a bunch of small components to be bundled into one file. To implement, inherit on container class like you would with a monobehaviour.
