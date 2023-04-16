@@ -4,52 +4,109 @@ using UnityEngine;
 
 namespace MonitorBreak
 {
-    public class TimeManagement
+    [IntializeAtRuntime]
+    public class TimeManagement : MonoBehaviour
     {
-        private static object objectWithPriority = null;
-
-        public static Notify onNoPriority;
-
-        public static void SetPriority(object self)
+        private struct TimeScale
         {
-            objectWithPriority = self;
+            public float actualTimeScale;
+            public int priority;
+
+
+            public TimeScale(float actualTimeScale, int priority)
+            {
+                this.actualTimeScale = actualTimeScale;
+                this.priority = priority;
+            }
         }
 
-        public static bool HasPriority(object self)
+        private static Dictionary<object, TimeScale> timeScales = new Dictionary<object, TimeScale>();
+        private static TimeScale defaultTimeScale;
+
+        private static int currentHighestPriority;
+        private static float normalFixedDeltaTime;
+
+        private void Awake()
         {
-            return objectWithPriority == self;
+            defaultTimeScale = new TimeScale(1.0f, 0);
+            normalFixedDeltaTime = Time.fixedDeltaTime;
         }
 
-        public static bool AnythingHasPriority()
+        private void OnLevelWasLoaded(int level)
         {
-            return objectWithPriority != null;
+            ResetTimeScales(this);
         }
 
-        public static void ReleasePriority(object self)
+        private static void ResetTimeScales(object selfOrigin)
         {
-            if (objectWithPriority != self)
+            timeScales = new Dictionary<object, TimeScale>
+        {
+            { selfOrigin, defaultTimeScale }
+        };
+
+            Time.timeScale = 1.0f;
+            currentHighestPriority = 0;
+        }
+
+        public static void AddTimeScale(float timeScale, int priority, object origin)
+        {
+            if (timeScales.ContainsKey(origin))
             {
                 return;
             }
 
-            ReleasePriority();
-        }
+            TimeScale newTimeScale = new TimeScale(timeScale, priority);
+            timeScales.Add(origin, newTimeScale);
 
-        public static void ReleasePriority()
-        {
-            objectWithPriority = null;
-            onNoPriority?.Invoke();
-        }
-
-        public static void SetTimeScale(float newTimeScale, object self)
-        {
-            if (objectWithPriority != null && objectWithPriority != self)
+            if (currentHighestPriority <= priority)
             {
-                //An object has priority and it is not the one passed
+                SetTimeScaleAndPriority(timeScale, priority);
+            }
+        }
+
+        public static void RemoveTimeScale(object origin)
+        {
+            if (!timeScales.ContainsKey(origin))
+            {
                 return;
             }
 
+            TimeScale timeScaleToBeRemoved = timeScales[origin];
+            timeScales.Remove(origin);
+
+            if (timeScaleToBeRemoved.priority == currentHighestPriority)
+            {
+                //Find highest priority in dictionary and set that as highest priority
+                float newTimeScale = 1.0f;
+                int newHighestPriority = 0;
+
+                foreach (TimeScale scale in timeScales.Values)
+                {
+                    if (scale.priority > newHighestPriority)
+                    {
+                        newHighestPriority = scale.priority;
+                        newTimeScale = scale.actualTimeScale;
+                    }
+                }
+
+                SetTimeScaleAndPriority(newTimeScale, newHighestPriority);
+            }
+        }
+
+        private static void SetTimeScaleAndPriority(float newTimeScale, int newPriority)
+        {
             Time.timeScale = newTimeScale;
+            if (Time.timeScale == 0.0f)
+            {
+                Time.fixedDeltaTime = 0.0f;
+            }
+            else
+            {
+                Time.fixedDeltaTime = normalFixedDeltaTime / (1.0f / Time.timeScale);
+            }
+
+
+            currentHighestPriority = newPriority;
         }
     }
 }
