@@ -16,6 +16,7 @@ namespace MonitorBreak.MB2D
         [Header("Camera Bounds")]
         public float width = 5.0f;
         public float height = 5.0f;
+        public Vector3 center;
 
         [Header("Ouput Settings")]
         public Vector2Int outputRes;
@@ -58,6 +59,8 @@ namespace MonitorBreak.MB2D
         {
             if (running)
             {
+                targetCamera.transform.position = center;
+
                 targetCamera.aspect = width / height;
                 targetCamera.orthographicSize = height * 0.5f;
 
@@ -119,7 +122,7 @@ namespace MonitorBreak.MB2D
         {
             Gizmos.color = Color.blue;
 
-            Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 0.0f));
+            Gizmos.DrawWireCube(center, new Vector3(width, height, 0.0f));
         }
     }
 }
