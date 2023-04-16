@@ -585,11 +585,11 @@ namespace MonitorBreak.Bebug
             currentConsoleState = newState;
             if (currentConsoleState == ConsoleState.FullScreen)
             {
-                Time.timeScale = 0.0f;
+                TimeManagement.AddTimeScale(0.0f, 100, inputHistory);
             }
             else
             {
-                Time.timeScale = 1.0f;
+                TimeManagement.RemoveTimeScale(inputHistory);
             }
 
             consoleActivated = true;
