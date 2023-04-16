@@ -2,7 +2,7 @@
 
 ### This code is not written with other people in mind so usefulness may vary. Anyone is free to use it however, and it won't break anything when imported into your project.
 
-Related to this, **no proper official documentation is provided**, only the text below. While documentation will maybe be written at some point, currently the majority of our focus is on ***MartEMart***.
+Related to this, **no proper official documentation is provided**, only the text below. While documentation will maybe be written at some point, currently the majority of our focus is on making our own games.
 
 Email: monitorbreakgames@gmail.com
 
@@ -13,7 +13,7 @@ Twitter: [@Monitor_Break_](https://twitter.com/Monitor_Break_)
 Additions is licensed under a [MIT License](https://opensource.org/licenses/MIT) with an inserted [Commons Clause](https://commonsclause.com/). 
 
 **The common clause was added to prevent people simply taking the things we have coded and selling them. Using Additions in commercial products is fully
-in line with the license.**
+in line with the license and Additions's intended use.**
 
 A plain-text version of the license is included in the repository.
 
@@ -94,24 +94,28 @@ The location to save the file is determined by 'Application.persistentDataPath' 
 ### Console
 A more performant version of the unity console, within the game itself. Also returns all objects logged for easy insertion into code. Supports multiple consoles at once and multiple console modes. To switch between console modes press the F1-F3 keys. F4 hides all consoles.
 
-Full list of supported commands:
+List of basic commands:
 
-        '[Text]' Print something to console
+       '[Text]' Print something to console
 	
-        '.' or 'clear' clear console
+       '.' or 'clear' clear console
 	
-        'hide' hide all consoles (same as F4)
+       'hide' hide all consoles (same as F4)
 	
-        'exit' closes current console
+       'exit' closes current console
 	
-        'new' add a new console
+       'new' add a new console
 	
-        TAB switch between consoles
+       TAB switch between consoles
 	
 WARNING: Currently, there is an issue with logging every frame, causing performance issues. Will be fixed at some point promise!
 	
 ### ConsoleCMD
-An attribute that allows for custom commands that will run a public, static function. The function cannot take any arguments.
+An attribute that allows for custom commands that will run a public, static function. The function cannot take any arguments but typically we will use this to run an in-between method that runs another method passing arguments.
+
+Extra command included alongside:
+
+	'commands' log all custom commands and their descriptors
 
 ### Graph
 UI graphing, allows points to be plotted on a graph that is displayed on screen. Graph will resize to fit all points. 
