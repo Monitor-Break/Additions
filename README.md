@@ -144,3 +144,5 @@ Takes an output from a low-res camera to displays it onto a quad, allowing for p
 - Last, you will need a 3D quad that uses a material that has a "_MainTex" property, the standard sprite un-lit should work.
 
 (A different quad will be needed for each instance of the component, however the camera can be re-used for each.)
+
+***(Make sure there are no colliders on the output quad, this will cause massive performance issues!)***
