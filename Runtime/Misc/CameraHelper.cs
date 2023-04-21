@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using MonitorBreak.MB2D;
 
 namespace MonitorBreak
 {
@@ -64,16 +65,17 @@ namespace MonitorBreak
             return new Vector2(height * camera.aspect, height);
         }
 
-        private static UnityEvent afterCameraPositionUpdate = new UnityEvent();
+        //In the future (if we need it) this should be converted to a more general system that utilizes an interface
+        private static List<PixelatedRender> pixelatedRendersToUpdate = new List<PixelatedRender>();
 
-        public static void RunCodeAfterCameraPositionUpdate(UnityAction function)
+        public static void RunCodeAfterCameraPositionUpdate(PixelatedRender pixelatedRender)
         {
-            afterCameraPositionUpdate.AddListener(function);
+            pixelatedRendersToUpdate.Add(pixelatedRender);
         }
 
-        public static void StopRunningCodeAfterCameraPositionUpdate(UnityAction function)
+        public static void StopRunningCodeAfterCameraPositionUpdate(PixelatedRender pixelatedRender)
         {
-            afterCameraPositionUpdate.RemoveListener(function);
+            pixelatedRendersToUpdate.Add(pixelatedRender);
         }
 
 
@@ -89,7 +91,10 @@ namespace MonitorBreak
             float distanceMagnitude = Vector3.Distance(cameraRootTransform.position, targetPos);
             cameraRootTransform.position = Vector3.MoveTowards(cameraRootTransform.position, targetPos, Time.deltaTime * 5.0f * Mathf.Clamp(distanceMagnitude, minCameraMoveSpeed, maxCameraMoveSpeed));
 
-            afterCameraPositionUpdate.Invoke();
+            foreach (PixelatedRender render in pixelatedRendersToUpdate)
+            {
+                render.Render();
+            }
 
             //Update target position
             if (currentNewPosPriority <= NORMALPOSPRIORITY - 100)
