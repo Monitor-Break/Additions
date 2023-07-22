@@ -406,7 +406,7 @@ namespace MonitorBreak.Bebug
         }
 
         private char lastChar = ' ';
-        private float minimumTimeTillNextChar = 0.1f;  //You can decrease this if you have a "higher" end device (anything beyond like 60 fps) (0.1 and 0.25 are good values)
+        private float minimumTimeTillNextChar = 0.25f;  //You can decrease this if you have a "higher" end device (anything beyond like 60 fps) (0.1 and 0.25 are good values)
         private float currentTimeTillSameChar;
 
         private KeyCode lastKeyCode;
@@ -681,7 +681,7 @@ namespace MonitorBreak.Bebug
         public static void HideAllConsoles()
         {
             consoleActivated = false;
-            Time.timeScale = 1.0f;
+            TimeManagement.RemoveTimeScale(inputHistory);
         }
     }
 }

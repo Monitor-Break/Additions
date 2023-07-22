@@ -45,7 +45,23 @@ namespace MonitorBreak
         };
 
             Time.timeScale = 1.0f;
+            Time.fixedDeltaTime = 0.02f;
             currentHighestPriority = 0;
+        }
+
+        public static void ReplaceTimeScale(float timeScale, object origin)
+        {
+            if (!timeScales.ContainsKey(origin))
+            {
+                return;
+            }
+
+            timeScales[origin] = new TimeScale(timeScale, timeScales[origin].priority);
+
+            if (timeScales[origin].priority == currentHighestPriority)
+            {
+                SetTimeScaleAndPriority(timeScale, currentHighestPriority);
+            }
         }
 
         public static void AddTimeScale(float timeScale, int priority, object origin)
@@ -104,7 +120,6 @@ namespace MonitorBreak
             {
                 Time.fixedDeltaTime = normalFixedDeltaTime / (1.0f / Time.timeScale);
             }
-
 
             currentHighestPriority = newPriority;
         }
