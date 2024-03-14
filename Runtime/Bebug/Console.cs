@@ -97,6 +97,15 @@ namespace MonitorBreak.Bebug
         }
         //
 
+        //Read command
+        private static Dictionary<string, FieldInfo> readableFields = new Dictionary<string, FieldInfo>();
+
+        public static void SetReadableFields(Dictionary<string, FieldInfo> newReadableFields)
+        {
+            readableFields = newReadableFields;
+        }
+        //
+
         public static void Execute(string inputString, Console output = null)
         {
             //Validate string
@@ -113,6 +122,7 @@ namespace MonitorBreak.Bebug
 
             //Execute Command
             //If a custom command has been entered execute it here
+            //Refactor this to use a dictionary at some point please, this implementation is stupid :((
             foreach(CustomCommand command in customCommands)
             {
                 if(command.identifier == inputStringSplit[0])
@@ -144,6 +154,24 @@ namespace MonitorBreak.Bebug
                 }
 
                 Log(commandsOutput, output.GetConsoleIndex(), false);
+            }
+            else if (inputStringSplit[0] == "read")
+            {
+                if (readableFields.TryGetValue(inputStringSplit[1], out FieldInfo field))
+                {
+                    Log($"Value:    {field.GetValue(null)}", output.GetConsoleIndex(), false);
+                }
+            }
+            else if (inputString == "readables")
+            {
+                string readablesOutput = "Readable Values:\n";
+
+                foreach (String key in readableFields.Keys)
+                {
+                    readablesOutput = $"{readablesOutput}           - {key}\n";
+                }
+
+                Log(readablesOutput, output.GetConsoleIndex(), false);
             }
             else if (inputString == "hide")
             {
@@ -608,7 +636,7 @@ namespace MonitorBreak.Bebug
             // #endif     
             Console currentConsole = BebugManagement.GetConsole(consoleNumber);
             currentConsole.OutputLine($"{errorType.ToString()} ERROR: {output}");
-            currentConsole.AutohighlightLine(output.ToString(), Color.red);
+            //currentConsole.AutohighlightLine(output.ToString(), Color.red);
             return output;
         }
 

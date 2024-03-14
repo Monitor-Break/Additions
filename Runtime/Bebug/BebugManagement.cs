@@ -72,6 +72,7 @@ namespace MonitorBreak.Bebug
         private void Awake()
         {
             baseTexture = GenerateTexture(Color.black);
+            new Console(ConsoleName());
         }
 
         private void Update()

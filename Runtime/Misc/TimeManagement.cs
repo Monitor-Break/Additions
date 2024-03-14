@@ -40,9 +40,9 @@ namespace MonitorBreak
         private static void ResetTimeScales(object selfOrigin)
         {
             timeScales = new Dictionary<object, TimeScale>
-        {
-            { selfOrigin, defaultTimeScale }
-        };
+            {
+                { selfOrigin, defaultTimeScale }
+            };
 
             Time.timeScale = 1.0f;
             Time.fixedDeltaTime = 0.02f;

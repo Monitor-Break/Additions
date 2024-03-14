@@ -121,7 +121,7 @@ namespace MonitorBreak.Bebug
             //Set all pixels in output texture 
             foreach (Vector2Int pos in pixelPositions)
             {
-                outputTexture.SetPixel(pos.x, pos.y, Color.white);
+                outputTexture.SetPixel(pos.x, pos.y, color);
             }
 
             //If we have any negative y values we need to draw the x-axis
