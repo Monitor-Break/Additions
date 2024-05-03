@@ -7,7 +7,7 @@ namespace MonitorBreak.Bebug
     [IntializeAtRuntime]
     public class BebugManagement : MonoBehaviour
     {
-        public const bool DebugEnabled = true;
+        public static bool DebugEnabled = false;
 
         public static Texture2D baseTexture;
 
