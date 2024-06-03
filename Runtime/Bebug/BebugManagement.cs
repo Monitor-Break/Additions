@@ -7,7 +7,7 @@ namespace MonitorBreak.Bebug
     [IntializeAtRuntime]
     public class BebugManagement : MonoBehaviour
     {
-        public static bool DebugEnabled = false;
+        public static bool DebugEnabled = true;
 
         public static Texture2D baseTexture;
 
@@ -68,6 +68,21 @@ namespace MonitorBreak.Bebug
             graphs.Add(graph);
         }
         //GRAPH
+
+
+        //DEBUG OUTPUT
+        private static List<DebugOutput> debugOuts = new List<DebugOutput>();
+
+        public static void AddDebugOutput(DebugOutput debugOut)
+        {
+            debugOuts.Add(debugOut);
+        }
+
+        public static void RemoveDebugOutput(DebugOutput debugOut)
+        {
+            debugOuts.Remove(debugOut);
+        }
+        //DEBUG OUTPUT
 
         private void Awake()
         {
@@ -140,6 +155,13 @@ namespace MonitorBreak.Bebug
                 foreach (Graph graph in graphs)
                 {
                     graph.DrawGraph();
+                }
+
+                //Debug Outs
+                Vector3 collectiveOffset = Vector3.zero;
+                foreach (DebugOutput db in debugOuts)
+                {
+                    collectiveOffset = db.DrawOutput(collectiveOffset);
                 }
             }
         }

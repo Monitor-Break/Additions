@@ -155,7 +155,7 @@ namespace MonitorBreak.Bebug
 
                 Log(commandsOutput, output.GetConsoleIndex(), false);
             }
-            else if (inputStringSplit[0] == "read")
+            else if (inputStringSplit[0] == "read" && inputStringSplit.Length > 1)
             {
                 if (readableFields.TryGetValue(inputStringSplit[1], out FieldInfo field))
                 {
