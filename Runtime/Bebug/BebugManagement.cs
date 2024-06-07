@@ -161,6 +161,7 @@ namespace MonitorBreak.Bebug
                 Vector3 collectiveOffset = Vector3.zero;
                 foreach (DebugOutput db in debugOuts)
                 {
+                    collectiveOffset.y += db.GetBuffer();
                     collectiveOffset = db.DrawOutput(collectiveOffset);
                 }
             }

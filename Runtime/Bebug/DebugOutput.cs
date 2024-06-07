@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static MonitorBreak.Bebug.DebugOutput;
 
 namespace MonitorBreak.Bebug
 {
@@ -18,9 +19,9 @@ namespace MonitorBreak.Bebug
 
             public float width = 100.0f;
 
-            public Section(string name, float width = 100.0f)
+            public Section(string visualName, float width = 100.0f)
             {
-                this.name = name;
+                this.name = visualName;
                 this.width = width;
             }
 
@@ -58,11 +59,18 @@ namespace MonitorBreak.Bebug
         }
 
         private List<Section> sections = new List<Section>();
+        private int buffer;
 
-        public DebugOutput(List<Section> initalSections)
+        public int GetBuffer()
+        {
+            return buffer;
+        }
+
+        public DebugOutput(List<Section> initalSections, int buffer = 0)
         {
             sections = initalSections;
             Init();
+            this.buffer = buffer;
         }
 
         private void Init()
@@ -77,18 +85,34 @@ namespace MonitorBreak.Bebug
 
         public Vector3 DrawOutput(Vector3 startingOffset)
         {
+            GUI.skin.box.richText = true;
+
             TextAnchor normalAnchor = GUI.skin.box.alignment;
             Vector3 drawOffset = startingOffset;
 
             //Draw each section
             foreach (Section section in sections)
             {
-                Vector3 size = new Vector3(section.width, 0.0f);
+                Vector3 size = new Vector3(section.width, 22.0f);
+
+                GUI.skin.box.alignment = TextAnchor.MiddleLeft;
+                if (!string.IsNullOrEmpty(section.name))
+                {
+                    GUI.skin.box.fontStyle = FontStyle.Bold;
+
+                    GUI.Box(
+                        new Rect(drawOffset, size),
+                        section.name);
+
+                    GUI.skin.box.fontStyle = FontStyle.Normal;
+                }
 
                 foreach (Part part in section.GetParts())
                 {
                     if (part.active)
                     {
+                        drawOffset.y += size.y;
+
                         GUI.skin.box.alignment = part.anchor;
 
                         if (part.type == Part.PartType.Text)
@@ -99,8 +123,6 @@ namespace MonitorBreak.Bebug
                                 new Rect(drawOffset, size),
                                 part.mainText);
                         }
-
-                        drawOffset.y += size.y;
                     }
                 }
             }
