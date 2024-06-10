@@ -105,24 +105,26 @@ namespace MonitorBreak.Bebug
                         section.name);
 
                     GUI.skin.box.fontStyle = FontStyle.Normal;
+
+                    drawOffset.y += size.y;
                 }
 
                 foreach (Part part in section.GetParts())
                 {
                     if (part.active)
                     {
-                        drawOffset.y += size.y;
-
                         GUI.skin.box.alignment = part.anchor;
 
                         if (part.type == Part.PartType.Text)
                         {
-                            size.y = 22.0f;
+                            size.y = 22.0f * (part.mainText.Split("\n").Length);
 
                             GUI.Box(
                                 new Rect(drawOffset, size),
                                 part.mainText);
                         }
+
+                        drawOffset.y += size.y;
                     }
                 }
             }
