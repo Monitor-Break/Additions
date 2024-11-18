@@ -7,7 +7,13 @@ namespace MonitorBreak.Bebug
     [IntializeAtRuntime]
     public class BebugManagement : MonoBehaviour
     {
-        public static bool DebugEnabled = true;
+        public static bool DebugEnabled 
+        {
+            get
+            {
+                return Debug.isDebugBuild;
+            }
+        }
 
         public static Texture2D baseTexture;
 
@@ -158,10 +164,10 @@ namespace MonitorBreak.Bebug
                 }
 
                 //Debug Outs
-                Vector3 collectiveOffset = Vector3.zero;
+                Vector2 collectiveOffset = Vector2.zero;
                 foreach (DebugOutput db in debugOuts)
                 {
-                    collectiveOffset.y += db.GetBuffer();
+                    collectiveOffset += db.GetBuffer();
                     collectiveOffset = db.DrawOutput(collectiveOffset);
                 }
             }

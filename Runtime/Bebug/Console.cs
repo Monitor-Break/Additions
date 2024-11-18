@@ -208,10 +208,11 @@ namespace MonitorBreak.Bebug
         {
             FullScreen,
             Sidebar,
-            SingleLine
+            SingleLine,
+            Closed
         }
 
-        private static ConsoleState currentConsoleState = ConsoleState.FullScreen;
+        private static ConsoleState currentConsoleState = ConsoleState.Closed;
 
         public static ConsoleState GetConsoleState()
         {
@@ -708,6 +709,7 @@ namespace MonitorBreak.Bebug
 
         public static void HideAllConsoles()
         {
+            UpdateState(ConsoleState.Closed);
             consoleActivated = false;
             TimeManagement.RemoveTimeScale(inputHistory);
         }

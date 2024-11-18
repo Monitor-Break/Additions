@@ -15,8 +15,11 @@ namespace MonitorBreak.Bebug
 
             Vector3 halfExtents = extents * 0.5f;
 
+            Vector3 flatExtents = extents;
+            flatExtents.y = 0;
+
             //Top
-            DrawWirePlane(center + (Vector3.up * halfExtents.y), extents, color, duration);
+            DrawWirePlane(center + (Vector3.up * halfExtents.y), flatExtents, Vector3.up, color, duration, false);
 
             //Connectors
             //TopRight
@@ -30,28 +33,36 @@ namespace MonitorBreak.Bebug
 
 
             //Bottom
-            DrawWirePlane(center - (Vector3.up * halfExtents.y), extents, color, duration);
+            DrawWirePlane(center - (Vector3.up * halfExtents.y), flatExtents, Vector3.down, color, duration, false);
         }
 
-        public static void DrawWirePlane(Vector3 center, Vector3 extents, Color color, float duration)
+        public static void DrawWirePlane(Vector3 center, Vector3 extents, Vector3 normal, Color color, float duration, bool simple)
         {
             if (!Application.isEditor)
             {
                 return;
             }
 
-            extents.y = 0.0f;
             Vector3 halfExtents = extents * 0.5f;
 
-            Vector3 topRight = center + halfExtents;
-            Vector3 topLeft = center + new Vector3(-halfExtents.x, 0, halfExtents.z);
-            Vector3 bottomRight = center + new Vector3(halfExtents.x, 0, -halfExtents.z);
-            Vector3 bottomLeft = center - halfExtents;
+            Vector3 secondPoint = halfExtents;
+            Vector3 thirdPoint = Vector3.Cross(secondPoint, normal);
 
-            Debug.DrawLine(topRight, bottomRight, color, duration);
-            Debug.DrawLine(bottomRight, bottomLeft, color, duration);
-            Debug.DrawLine(bottomLeft, topLeft, color, duration);
-            Debug.DrawLine(topLeft, topRight, color, duration);
+            if (!simple)
+            {
+                Debug.DrawRay(center, thirdPoint, Color.yellow, duration);
+                Debug.DrawRay(center, secondPoint, Color.green, duration);
+            }
+
+            Vector3 a = center + secondPoint;
+            Vector3 b = center + thirdPoint;
+            Vector3 c = center - secondPoint;
+            Vector3 d = center - thirdPoint;
+
+            Debug.DrawLine(a, b, color, duration);
+            Debug.DrawLine(b, c, color, duration);
+            Debug.DrawLine(c, d, color, duration);
+            Debug.DrawLine(d, a, color, duration);
         }
     }
 }

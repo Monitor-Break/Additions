@@ -59,18 +59,20 @@ namespace MonitorBreak.Bebug
         }
 
         private List<Section> sections = new List<Section>();
-        private int buffer;
+        private Vector2 buffer;
+        private bool flat;
 
-        public int GetBuffer()
+        public Vector2 GetBuffer()
         {
             return buffer;
         }
 
-        public DebugOutput(List<Section> initalSections, int buffer = 0)
+        public DebugOutput(List<Section> initalSections, Vector2 buffer, bool flat = false)
         {
             sections = initalSections;
             Init();
             this.buffer = buffer;
+            this.flat = flat;
         }
 
         private void Init()
@@ -93,6 +95,7 @@ namespace MonitorBreak.Bebug
             //Draw each section
             foreach (Section section in sections)
             {
+                //Draw section label
                 Vector3 size = new Vector3(section.width, 22.0f);
 
                 GUI.skin.box.alignment = TextAnchor.MiddleLeft;
@@ -100,20 +103,38 @@ namespace MonitorBreak.Bebug
                 {
                     GUI.skin.box.fontStyle = FontStyle.Bold;
 
+                    if (flat)
+                    {
+                        size.x = section.name.Length * 10;
+                    }
+
                     GUI.Box(
                         new Rect(drawOffset, size),
                         section.name);
 
                     GUI.skin.box.fontStyle = FontStyle.Normal;
 
-                    drawOffset.y += size.y;
+                    if (flat)
+                    {
+                        drawOffset.x += size.x;
+                    }
+                    else
+                    {
+                        drawOffset.y += size.y;
+                    }
                 }
 
+                //Draw all parts of the section
                 foreach (Part part in section.GetParts())
                 {
                     if (part.active)
                     {
                         GUI.skin.box.alignment = part.anchor;
+
+                        if (flat)
+                        {
+                            size.x = part.mainText.Length * 10;
+                        }
 
                         if (part.type == Part.PartType.Text)
                         {
@@ -121,10 +142,18 @@ namespace MonitorBreak.Bebug
 
                             GUI.Box(
                                 new Rect(drawOffset, size),
-                                part.mainText);
+                                " | " + part.mainText);
                         }
 
-                        drawOffset.y += size.y;
+
+                        if (flat)
+                        {
+                            drawOffset.x += size.x;
+                        }
+                        else
+                        {
+                            drawOffset.y += size.y;
+                        }
                     }
                 }
             }
